@@ -1,5 +1,23 @@
 const selectedSeats = new Set();
 const ticketPrice = 100;
+const movie = getMovie();
+
+function getFormattedTime() {
+  if (time) {
+    const time = getQueryParam("time");
+    const date = new Date(time);
+    return date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+  }
+
+  console.error("No time provided in the URL");
+}
+
+const formattedTime = getFormattedTime();
+const recordName = `seats-${movie.id}-${formattedTime}`;
 
 const rowMap = {
   0: "A",
@@ -14,7 +32,7 @@ const rowMap = {
 
 function getSeats() {
   return (
-    JSON.parse(localStorage.getItem("seats")) ||
+    JSON.parse(localStorage.getItem(recordName)) ||
     Array(8)
       .fill()
       .map(() =>
@@ -94,7 +112,7 @@ function updateSeats(newSeatIndex, isReserved = false) {
 
 function saveSeats() {
   renderSeats();
-  localStorage.setItem("seats", JSON.stringify(seats));
+  localStorage.setItem(recordName, JSON.stringify(seats));
 }
 
 function addSeatNumber() {
@@ -157,8 +175,6 @@ function renderSelectedSeats() {
     });
 }
 
-const movie = getMovie();
-
 const moviePoster = document.getElementById("movie-poster");
 const movieTitle = document.getElementById("movie-title");
 const movieDuration = document.getElementById("movie-duration");
@@ -168,22 +184,8 @@ document.addEventListener("DOMContentLoaded", function () {
   moviePoster.alt = `${movie.title} poster`;
   movieTitle.textContent = movie.title;
   movieDuration.textContent = `${movie.duration} - ${movie.genre.join(", ")}`;
-
-  const queryParams = new URLSearchParams(window.location.search);
-  const time = queryParams.get("time"); // Extraer el horario de la URL
-  console.log(time);
   if (time) {
-    const date = new Date(time);
-    console.log(date);
-    const formattedTime = date.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-    console.log(formattedTime);
     document.getElementById("time").textContent = formattedTime; // Mostrar en el HTML
-  } else {
-    console.error("No time provided in the URL");
   }
   //Main
 
