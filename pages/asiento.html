@@ -30,10 +30,35 @@
           <h3 class="movie--header--title">Wall-e</h3>
           <p class="movie--header--duration">100 min - Aventura</p>
           <span class="info-spot" href="#"> 2:00 pm </span>
+          <p>Precio por boleto: $<strong id="ticket-price"></strong></p>
+          <p class=" ">Cuantos asientos quieres?</p>
+          <div class="seats--info">
+            <button
+              class="btn select--button"
+              id="substract-button"
+              disabled
+              onclick="substractSeatNumber()"
+            >
+              -
+            </button>
+            <input type="number" max="8" min="1" id="seats-number" disabled />
+            <button
+              class="btn select--button"
+              id="add-button"
+              onclick="addSeatNumber()"
+            >
+              +
+            </button>
+          </div>
+          <p>
+            Asientos seleccionados: <br /><strong id="seats-selected"></strong>
+          </p>
+          <p><span>Total: </span> <strong id="seats-total">$0.00</strong></p>
         </div>
       </section>
 
       <h2>Asientos disponibles</h2>
+      <button class="btn" id="btn-reservar" onclick="saveSeats()" disabled>Reservar</button>
       <section id="seats" class="seats"></section>
     </main>
     <script src="../js/main.js"></script>
