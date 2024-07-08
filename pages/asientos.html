@@ -25,11 +25,13 @@
 
     <main>
       <section class="movie--header">
-        <img src="../img/walle.webp" alt="walle poster" />
+        <img src="../img/walle.webp" alt="walle poster" id="movie-poster" />
         <div class="movie--header--text">
-          <h3 class="movie--header--title">Wall-e</h3>
-          <p class="movie--header--duration">100 min - Aventura</p>
-          <span class="info-spot" href="#"> 2:00 pm </span>
+          <h3 class="movie--header--title" id="movie-title">Wall-e</h3>
+          <p class="movie--header--duration" id="movie-duration">
+            100 min - Aventura
+          </p>
+          <span class="info-spot" id="time" href="#"> 2:00 pm </span>
           <p>Precio por boleto: $<strong id="ticket-price"></strong></p>
           <p class=" ">Cuantos asientos quieres?</p>
           <div class="seats--info">
@@ -58,7 +60,9 @@
       </section>
 
       <h2>Asientos disponibles</h2>
-      <button class="btn" id="btn-reservar" onclick="saveSeats()" disabled>Reservar</button>
+      <button class="btn" id="btn-reservar" onclick="saveSeats()" disabled>
+        Reservar
+      </button>
       <section id="seats" class="seats"></section>
     </main>
     <script src="../js/main.js"></script>

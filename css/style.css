@@ -49,6 +49,7 @@ main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 2em;
 }
 
 .movie {
@@ -60,7 +61,7 @@ main {
   border-radius: 8px;
   color: white;
   padding: 0em 2em;
-  padding-top: 20em;
+  padding-top: 15em;
   padding-bottom: 3em;
   width: clamp(20em, 100vw, 30em);
   gap: 2em;

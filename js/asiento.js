@@ -98,7 +98,6 @@ function saveSeats() {
 }
 
 function addSeatNumber() {
-  
   if (substractButton.disabled) {
     substractButton.disabled = false;
   }
@@ -158,10 +157,39 @@ function renderSelectedSeats() {
     });
 }
 
-//Main
+const movie = getMovie();
 
-ticketPriceElement.innerHTML = ticketPrice;
+const moviePoster = document.getElementById("movie-poster");
+const movieTitle = document.getElementById("movie-title");
+const movieDuration = document.getElementById("movie-duration");
 
-seatsNumber.value = 1;
-renderTotalPrice();
-renderSeats();
+document.addEventListener("DOMContentLoaded", function () {
+  moviePoster.src = `../${movie.image}`;
+  moviePoster.alt = `${movie.title} poster`;
+  movieTitle.textContent = movie.title;
+  movieDuration.textContent = `${movie.duration} - ${movie.genre.join(", ")}`;
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const time = queryParams.get("time"); // Extraer el horario de la URL
+  console.log(time);
+  if (time) {
+    const date = new Date(time);
+    console.log(date);
+    const formattedTime = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+    console.log(formattedTime);
+    document.getElementById("time").textContent = formattedTime; // Mostrar en el HTML
+  } else {
+    console.error("No time provided in the URL");
+  }
+  //Main
+
+  ticketPriceElement.innerHTML = ticketPrice;
+
+  seatsNumber.value = 1;
+  renderTotalPrice();
+  renderSeats();
+});
