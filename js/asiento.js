@@ -2,19 +2,6 @@ const selectedSeats = new Set();
 const ticketPrice = 100;
 const movie = getMovie();
 
-function getFormattedTime() {
-  if (time) {
-    const time = getQueryParam("time");
-    const date = new Date(time);
-    return date.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-  }
-
-  console.error("No time provided in the URL");
-}
 
 const formattedTime = getFormattedTime();
 const recordName = `seats-${movie.id}-${formattedTime}`;
@@ -113,6 +100,27 @@ function updateSeats(newSeatIndex, isReserved = false) {
 function saveSeats() {
   renderSeats();
   localStorage.setItem(recordName, JSON.stringify(seats));
+  savePurchase();
+}
+
+function savePurchase() {
+  const purchase = {
+    id: Math.floor(Math.random() * 100000),
+    movie: movie.id,
+    time: formattedTime,
+    total: parseInt(seatsNumber.value) * ticketPrice,
+    seats: Array.from(selectedSeats)
+    .sort()
+    .map((seat) => {
+      const _seat = seat.split("-");
+      return `${rowMap[_seat[0]]}${
+        Number(_seat[1]) + 1
+      }`;
+    }),
+    date: new Date().toISOString(),
+  };
+  localStorage.setItem(`purchase-${purchase.id}`, JSON.stringify(purchase));
+  window.location.href = `compra.html?purchase=${purchase.id}`;
 }
 
 function addSeatNumber() {
