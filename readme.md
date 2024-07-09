@@ -58,4 +58,4 @@ Si deseas contribuir a este proyecto, te invitamos a realizar un pull request o 
 
 ---
 
-Desarrollado por [noeosorio.dev](https://noeosorio.dev)
+Desarrollado por [noeosorio.dev](https://noeosorio.com)
